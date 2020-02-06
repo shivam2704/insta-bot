@@ -72,7 +72,7 @@ class instabot:
         
 #//a[contains(text(), 'Log in')]") where a is link tag, which simply searches a text 'Log in on html page
 
-bot = instabot("mave.rick1901", "Bubble@33")
+bot = instabot("mave.rick1901", "")
 bot.get_unfollowers()
 
 
