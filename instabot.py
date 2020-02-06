@@ -5,7 +5,7 @@ class instabot:
     def __init__(self, username, pw):
         self.driver = webdriver.Chrome()
         self.driver.get("https://instagram.com")
-        sleep(2)
+        sleep(3)
         self.driver.find_element_by_xpath("//a[contains(text(), 'Log in')]")\
         .click()
         sleep(2)
@@ -33,14 +33,20 @@ class instabot:
         sleep(2)
         self.driver.find_element_by_xpath("//a[contains(@href,'/following')]")\
             .click()
-        sleep(3)
-        self.driver.find_element_by_xpath("//a[contains(@href,'/followers')]")\
-            .click()
         
+        sleep(3)
+        self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button")\
+            .click()
+        self.driver.find_element_by_xpath("//a[contains(@href, '/followers')]")\
+            .click()
+        sleep(2)
+        self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button")
+        sleep(2)
+        self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div/button")
         
     def _get_names(self):
         sleep(2)
-        sugg = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
+        sugg = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions For You)]')
         self.driver.execute_script("arguments[0].scrollIntoView();",sugg)
         sleep(2)
         scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div[2]")
@@ -53,27 +59,29 @@ class instabot:
                 return arguments[0].scrollHeight;
                 """, scroll_box)
 
-       /*   followings = self._get_names()
-        followers = self._get_names()
-        not_following_back = [user for user in followings if user not in followers]
-        print(not_following_back)
-
-        links = scroll_box.find_element_by_tag_name('a')
-        names = [name.text for name in links if name.text != ''] */
+        
+       # links = scroll_box.find_element_by_tag_name('a')
+        #names = [name.text for name in links if name.text != ''] 
 
         #close button
         self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button/svg")\
             .click()
-        return names
+        #return names
     
            #/ .click()
-    
+   # def unfollowers(self):
+    #    followings = self._get_names()
+     #   followers = self._get_names()
+      #  not_following_back = [user for user in followings if user not in followers]
+       # print(not_following_back) 
+
+
     
         
 #//a[contains(text(), 'Log in')]") where a is link tag, which simply searches a text 'Log in on html page
 
-bot = instabot("mave.rick1901", "")
+bot = instabot("mave.rick1901", "Bubble@33")
 bot.get_unfollowers()
-
+#bot.unfollowers()
 
 #/html/body/div[4]/div/div/div[3]/button[2]
