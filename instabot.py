@@ -33,20 +33,9 @@ class instabot:
         sleep(2)
         self.driver.find_element_by_xpath("//a[contains(@href,'/following')]")\
             .click()
-        
-        sleep(3)
-        self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button")\
-            .click()
-        self.driver.find_element_by_xpath("//a[contains(@href, '/followers')]")\
-            .click()
+
         sleep(2)
-        self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button")
-        sleep(2)
-        self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div/button")
-        
-    def _get_names(self):
-        sleep(2)
-        sugg = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions For You)]')
+        sugg = self.driver.find_element_by_xpath('//h4[contains(text(), Suggestions)]')
         self.driver.execute_script("arguments[0].scrollIntoView();",sugg)
         sleep(2)
         scroll_box = self.driver.find_element_by_xpath("/html/body/div[4]/div/div[2]")
@@ -57,15 +46,41 @@ class instabot:
             ht = self.driver.execute_script("""
                 arguments[0].scrollTo(0, arguments[0].scrollHeight); 
                 return arguments[0].scrollHeight;
-                """, scroll_box)
+                """, scroll_box)                                          #scrolling following list
 
+        
+        sleep(3)
+        self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button")\
+            .click()
+        self.driver.find_element_by_xpath("//a[contains(@href, '/followers')]")\  #followers list
+            .click()
+        sleep(3)
+        
+        self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button")\
+            .click()
+        sleep(2)
+        
+        
+        
+        sleep(2)
+
+        self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div/button")\
+            .click()
+        sleep(2)
+        self.driver.find_element_by_xpath("//button[contains(text(), 'Log Out')]")\ #logging out
+        .click()
+        
+        #self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/div[1]/div/button")
+        
+   # def _get_names(self):
+        
         
        # links = scroll_box.find_element_by_tag_name('a')
         #names = [name.text for name in links if name.text != ''] 
 
         #close button
-        self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button/svg")\
-            .click()
+     #   self.driver.find_element_by_xpath("/html/body/div[4]/div/div[1]/div/div[2]/button/svg")\
+      #      .click()
         #return names
     
            #/ .click()
